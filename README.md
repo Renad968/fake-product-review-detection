@@ -1,57 +1,53 @@
 # Fake Product Review Detection
 
-An NLP project that uses a Bidirectional LSTM to classify product reviews as computer-generated or original human-written reviews.
+A machine learning project that classifies product reviews as **original (OR)** or **computer-generated (CG)** using Natural Language Processing (NLP) and a Bidirectional Long Short-Term Memory (BiLSTM) network.
 
 ## Project Overview
 
-Online shoppers use product reviews to help make purchasing decisions. This project explores how Natural Language Processing (NLP) and deep learning can classify review text into two dataset labels: computer-generated (CG) and original (OR).
+Online shoppers use product reviews to make purchasing decisions. This project trains a text classification model to recognize patterns associated with computer-generated reviews. The dataset labels are the target used for training; predictions should be treated as model estimates, not proof that a review is fraudulent.
 
 ## Dataset
 
-The dataset contains product review text, product category, rating, and label.
-
-- `CG`: Computer-generated review
-- `OR`: Original human-written review
-
-Dataset source: [Fake Reviews Detection](https://github.com/SayamAlt/Fake-Reviews-Detection)
-
-The dataset labels distinguish computer-generated text from original human-written text. They do not necessarily identify paid, deceptive, or fraudulent reviews.
+- **Rows:** 40,432 product reviews
+- **Labels:** 20,216 CG and 20,216 OR
+- **Columns:** `category`, `rating`, `label`, and `text_`
+- The dataset used in this notebook is `fake reviews dataset.csv`. It was obtained from the public [Fake Reviews Detection repository](https://github.com/SayamAlt/Fake-Reviews-Detection). The Kaggle competition shown in the project research requires an invitation to join, so this project uses the accessible dataset above.
+- `CG` means computer-generated; `OR` means original/human-written, according to the dataset.
 
 ## Method
 
-1. Inspected and explored the review dataset.
-2. Cleaned review text by lowercasing it, removing punctuation and common English stopwords, and filtering short words.
-3. Converted labels to numeric values: `CG = 1` and `OR = 0`.
-4. Split the data into training and testing sets using an 80/20 split.
-5. Tokenized the text and padded each review to 150 tokens.
-6. Trained a Bidirectional LSTM classifier.
-7. Evaluated the model on the held-out test set.
-
-## Model
-
-The model uses an embedding layer, a Bidirectional LSTM layer, dense layers, and a sigmoid output for binary classification. It was trained with the Adam optimizer and binary cross-entropy loss.
+1. Inspect the data, label counts, missing values, categories, and review lengths.
+2. Clean review text by lowercasing, removing punctuation and short tokens, and filtering English stop words.
+3. Split the data into training and test sets using an 80/20 stratified split (`random_state=42`).
+4. Convert text to integer sequences with a Keras tokenizer and pad/truncate each review to 150 tokens.
+5. Train a Bidirectional LSTM with an embedding layer, dense layer, dropout, and sigmoid output.
+6. Evaluate the model on the held-out test set using accuracy, precision, recall, F1-score, and a confusion matrix.
 
 ## Results
 
-- Test accuracy: **90.76%**
-- F1-score for Original (OR): **0.91**
-- F1-score for Computer-Generated (CG): **0.91**
+- **Test accuracy:** 91.37%
+- **Test loss:** 0.2347
+- **Test samples:** 8,087
+- **F1-score:** 0.91 for both classes (rounded)
 
-The notebook also reports precision, recall, and a confusion matrix for the test set.
+The result is from one stratified train/test split and may vary if the data, preprocessing, random seed, or training settings change.
 
-## How to Run
+## Run the Notebook
 
-1. Download the dataset CSV from the source repository.
-2. Open `Fake_Product_Review_Detection.ipynb` in Google Colab.
-3. Run the notebook cells in order.
-4. Upload the dataset CSV when prompted.
+1. Open `Fake_Product_Review_Detection.ipynb` in Google Colab.
+2. Upload `fake reviews dataset.csv` when the notebook asks for it.
+3. Run the notebook cells from top to bottom. The training cell takes a few minutes.
+4. Read the final classification report and confusion matrix for test performance.
+
+## Project Files
+
+- `Fake_Product_Review_Detection.ipynb` — complete analysis, preprocessing, model training, and evaluation.
+- `README.md` — project summary, data details, method, results, and run instructions.
 
 ## Limitations
 
-This model detects computer-generated review text as represented in this dataset. It is not a general-purpose detector of every type of fake, paid, or fraudulent product review. Its performance depends on the dataset and may not generalize to newer AI-generated reviews or other review platforms.
+This is an educational classifier trained on one labeled dataset. Its labels describe the dataset's distinction between computer-generated and original reviews; they do not independently verify a reviewer's identity, purchase, or intent. The model may misclassify reviews from other products, platforms, or writing styles.
 
-## Attribution
+## Reference
 
-Dataset source: [SayamAlt/Fake-Reviews-Detection](https://github.com/SayamAlt/Fake-Reviews-Detection)
-
-Original dataset paper: Salminen et al., “Creating and Detecting Fake Reviews of Online Products.”
+The project adapts the workflow taught in Coursera's NLP Fake News Detector hands-on course (text cleaning, tokenization, padding, recurrent models, and evaluation) to product review classification. The model architecture and task are tailored to this product-review dataset.
