@@ -51,3 +51,8 @@ This is an educational classifier trained on one labeled dataset. Its labels des
 ## Reference
 
 The project adapts the workflow taught in Coursera's NLP Fake News Detector hands-on course (text cleaning, tokenization, padding, recurrent models, and evaluation) to product review classification. The model architecture and task are tailored to this product-review dataset.
+
+
+## Saved Model Artifacts
+
+`project_artifacts.zip` contains the trained Keras model (`fake_review_bilstm.keras`), the matching tokenizer (`tokenizer.json`), pinned package versions (`requirements.txt`), and evaluation/model settings (`model_metadata.json`). Use these artifacts with the same preprocessing and sequence length used during training. The notebook remains the recommended way to reproduce the full workflow.
