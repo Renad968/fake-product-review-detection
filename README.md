@@ -25,8 +25,7 @@ Online shoppers use product reviews to make purchasing decisions. This project t
 
 ## Results
 
-The notebook's previously saved, pre-EarlyStopping run reported **90.76% test accuracy** and **0.2508 test loss** on 8,087 test reviews. This is a reference result from the old training run. Because EarlyStopping now restores the best validation-loss weights, rerun the updated notebook and use its newly generated metrics as the final result.
-
+With EarlyStopping, the model achieved 91.25% test accuracy and 0.2203 test loss on 8,087 test reviews. The macro-average F1-score was 0.91.
 ## Run the Notebook
 
 1. Open `Fake_Product_Review_Detection.ipynb` in Google Colab.
