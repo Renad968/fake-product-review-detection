@@ -8,8 +8,8 @@ Online shoppers use product reviews to make purchasing decisions. This project t
 
 ## Dataset
 
-- **Rows:** 40,432 product reviews
-- **Labels:** 20,216 CG and 20,216 OR
+- **Rows:** 40,412 product reviews after removing 20 duplicate review texts (the original file has 40,432 rows)
+- **Labels:** 20,197 CG and 20,215 OR
 - **Columns:** `category`, `rating`, `label`, and `text_`
 - The dataset used in this notebook is `fake reviews dataset.csv`. It was obtained from the public [Fake Reviews Detection repository](https://github.com/SayamAlt/Fake-Reviews-Detection). You can open or download the [dataset CSV file directly](https://github.com/SayamAlt/Fake-Reviews-Detection/blob/main/fake%20reviews%20dataset.csv). The Kaggle competition shown in the project research requires an invitation to join, so this project uses the accessible dataset above.
 - `CG` means computer-generated; `OR` means original/human-written, according to the dataset.
@@ -17,21 +17,25 @@ Online shoppers use product reviews to make purchasing decisions. This project t
 ## Method
 
 1. Inspect the data, label counts, missing values, categories, and review lengths.
-2. Clean review text by lowercasing, removing punctuation and short tokens, and filtering English stop words.
-3. Split the data into training and test sets using an 80/20 stratified split (random_state=42).
-4. Convert text to integer sequences with a Keras tokenizer and pad/truncate each review to 150 tokens.
-5. Train a Bidirectional LSTM with an embedding layer, dense layer, dropout, and sigmoid output.
-6. Evaluate the model on the held-out test set using accuracy, precision, recall, F1-score, and a confusion matrix.
+2. Remove duplicate review texts before splitting the data.
+3. Clean review text by lowercasing, removing punctuation and short tokens, and filtering English stop words.
+4. Split the data into training and test sets using an 80/20 stratified split (random_state=42).
+5. Convert text to integer sequences with a Keras tokenizer and pad/truncate each review to 150 tokens.
+6. Train a Bidirectional LSTM with an embedding layer, dense layer, dropout, and sigmoid output. EarlyStopping monitors validation loss on a 10% validation split taken from the training data only, and restores the best weights.
+7. Evaluate the model on the held-out test set using accuracy, precision, recall, F1-score, and a confusion matrix.
 
 ## Results
 
-With EarlyStopping, the model achieved 91.25% test accuracy and 0.2203 test loss on 8,087 test reviews. The macro-average F1-score was 0.91.
+With EarlyStopping, the model achieved 91.28% test accuracy and 0.2134 test loss on 8,083 test reviews. The macro-average F1-score was 0.91.
+
 ## Run the Notebook
 
 1. Open `Fake_Product_Review_Detection.ipynb` in Google Colab.
 2. Upload `fake reviews dataset.csv` when the notebook asks for it.
 3. Run the notebook cells from top to bottom. The training cell takes a few minutes.
 4. Read the final classification report and confusion matrix for test performance.
+
+Exact results may vary slightly between runs because neural network training is not fully deterministic.
 
 ## Project Files
 
@@ -53,4 +57,3 @@ Course workflow: The project adapts the workflow taught in Coursera's NLP Fake N
 ## Saved Model Artifacts
 
 `project_artifacts.zip` contains the trained Keras model (`fake_review_bilstm.keras`), the matching tokenizer (`tokenizer.json`), pinned package versions (`requirements.txt`), and evaluation/model settings (`model_metadata.json`). Use these artifacts with the same preprocessing and sequence length used during training. The notebook remains the recommended way to reproduce the full workflow.
-
