@@ -25,12 +25,7 @@ Online shoppers use product reviews to make purchasing decisions. This project t
 
 ## Results
 
-- **Test accuracy:** 91.37%
-- **Test loss:** 0.2347
-- **Test samples:** 8,087
-- **F1-score:** 0.91 for both classes (rounded)
-
-The result is from one stratified train/test split and may vary if the data, preprocessing, random seed, or training settings change.
+The notebook's previously saved, pre-EarlyStopping run reported **90.76% test accuracy** and **0.2508 test loss** on 8,087 test reviews. This is a reference result from the old training run. Because EarlyStopping now restores the best validation-loss weights, rerun the updated notebook and use its newly generated metrics as the final result.
 
 ## Run the Notebook
 
@@ -50,9 +45,11 @@ The result is from one stratified train/test split and may vary if the data, pre
 
 This is an educational classifier trained on one labeled dataset. Its labels describe the dataset's distinction between computer-generated and original reviews; they do not independently verify a reviewer's identity, purchase, or intent. The model may misclassify reviews from other products, platforms, or writing styles.
 
-## Reference
+## References
 
-The project adapts the workflow taught in Coursera's NLP Fake News Detector hands-on course (text cleaning, tokenization, padding, recurrent models, and evaluation) to product review classification. The model architecture and task are tailored to this product-review dataset.
+Dataset paper: Salminen, J., Kandpal, C., Kamel, A. M., Jung, S., & Jansen, B. J. (2022). Creating and detecting fake reviews of online products. *Journal of Retailing and Consumer Services, 64*, 102771. https://doi.org/10.1016/j.jretconser.2021.102771
+
+Course workflow: The project adapts the workflow taught in Coursera's NLP Fake News Detector hands-on course (text cleaning, tokenization, padding, recurrent models, and evaluation) to product review classification. The model architecture and task are tailored to this product-review dataset.
 
 ## Saved Model Artifacts
 
