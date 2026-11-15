@@ -11,7 +11,7 @@ Online shoppers use product reviews to make purchasing decisions. This project t
 - **Rows:** 40,412 product reviews after removing 20 duplicate review texts (the original file has 40,432 rows)
 - **Labels:** 20,197 CG and 20,215 OR
 - **Columns:** `category`, `rating`, `label`, and `text_`
-- The dataset used in this notebook is `fake reviews dataset.csv`. It was obtained from the public [Fake Reviews Detection repository](https://github.com/SayamAlt/Fake-Reviews-Detection). You can open or download the [dataset CSV file directly](https://github.com/SayamAlt/Fake-Reviews-Detection/blob/main/fake%20reviews%20dataset.csv). The Kaggle competition shown in the project research requires an invitation to join, so this project uses the accessible dataset above.
+- The dataset used in this notebook is `fake reviews dataset.csv`. Direct link to the CSV file: [fake reviews dataset.csv](https://github.com/SayamAlt/Fake-Reviews-Detection/blob/main/fake%20reviews%20dataset.csv). The Kaggle competition shown in the project research requires an invitation to join, so this project uses the accessible copy of the dataset above.
 - `CG` means computer-generated; `OR` means original/human-written, according to the dataset.
 
 ## Method
